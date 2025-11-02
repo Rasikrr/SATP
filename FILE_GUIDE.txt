@@ -1,0 +1,198 @@
+═══════════════════════════════════════════════════════════════════════
+SATP PROTOCOL - FILE GUIDE
+═══════════════════════════════════════════════════════════════════════
+
+📁 ALL FILES OVERVIEW
+═══════════════════════════════════════════════════════════════════════
+
+📄 START HERE
+─────────────────────────────────────────────────────────────────────
+1. PROJECT_SUMMARY.txt      ← READ THIS FIRST! Quick overview
+2. QUICK_START.md           ← How to run and use everything
+3. README.md                ← Complete documentation
+
+📚 PROTOCOL DOCUMENTATION
+─────────────────────────────────────────────────────────────────────
+SATP_Protocol_Design.md     → Full protocol specification
+                              - Research synthesis
+                              - Design rationale
+                              - Technical architecture
+                              - Security analysis
+                              (16 KB, comprehensive)
+
+💻 SOURCE CODE FILES
+─────────────────────────────────────────────────────────────────────
+satp_protocol.h             → Core protocol structures
+                              - Message formats
+                              - Enumerations
+                              - Data structures
+                              (5.3 KB)
+
+satp_encryption.h           → Encryption manager
+                              - Security levels
+                              - Cryptographic operations
+                              - HMAC implementation
+                              (7.4 KB)
+
+satp_client.h               → SATP client implementation
+                              - Connection management
+                              - Message transmission
+                              - Power adaptation
+                              - Privacy controls
+                              (17 KB)
+
+satp_demo.cpp               → Demonstration program
+                              - 5 complete scenarios
+                              - Interactive examples
+                              - Usage demonstrations
+                              (15 KB)
+
+🔧 BUILD SYSTEM
+─────────────────────────────────────────────────────────────────────
+Makefile                    → Automated build system
+                              - make          (build)
+                              - make run      (run demo)
+                              - make clean    (cleanup)
+                              - make help     (show commands)
+                              (2.2 KB)
+
+⚙️ EXECUTABLE
+─────────────────────────────────────────────────────────────────────
+satp_demo                   → Pre-compiled executable
+                              Ready to run immediately!
+                              $ ./satp_demo
+                              (74 KB binary)
+
+═══════════════════════════════════════════════════════════════════════
+QUICK USAGE GUIDE
+═══════════════════════════════════════════════════════════════════════
+
+▶ To Run the Demo Immediately:
+   $ ./satp_demo
+   [Press Enter to go through scenarios]
+
+▶ To Build from Source:
+   $ make
+   $ make run
+
+▶ To Read Documentation:
+   Start with PROJECT_SUMMARY.txt
+   Then read QUICK_START.md
+   For details: README.md and SATP_Protocol_Design.md
+
+═══════════════════════════════════════════════════════════════════════
+FILE SIZES
+═══════════════════════════════════════════════════════════════════════
+Makefile                     2.2 KB
+PROJECT_SUMMARY.txt          4.7 KB
+QUICK_START.md               8.2 KB
+README.md                   14 KB
+SATP_Protocol_Design.md     16 KB
+satp_protocol.h              5.3 KB
+satp_encryption.h            7.4 KB
+satp_client.h               17 KB
+satp_demo.cpp               15 KB
+satp_demo (executable)      74 KB
+FILE_GUIDE.txt (this file)   2.4 KB
+───────────────────────────────────────────────────────────────────────
+TOTAL                       ~165 KB
+
+═══════════════════════════════════════════════════════════════════════
+WHAT EACH FILE IS FOR
+═══════════════════════════════════════════════════════════════════════
+
+For Your Research Paper:
+─────────────────────────────────────────────────────────────────────
+✓ SATP_Protocol_Design.md   → Methodology, Design, Results
+✓ README.md                  → Technical Implementation
+✓ PROJECT_SUMMARY.txt        → Quick Reference
+
+For Running/Testing:
+─────────────────────────────────────────────────────────────────────
+✓ satp_demo (executable)     → Immediate demonstration
+✓ Makefile                   → Build automation
+✓ QUICK_START.md             → Usage instructions
+
+For Code Review:
+─────────────────────────────────────────────────────────────────────
+✓ satp_protocol.h            → Data structures
+✓ satp_encryption.h          → Security implementation
+✓ satp_client.h              → Core functionality
+✓ satp_demo.cpp              → Example usage
+
+For Presentations:
+─────────────────────────────────────────────────────────────────────
+✓ PROJECT_SUMMARY.txt        → Overview slides
+✓ satp_demo                  → Live demonstration
+✓ SATP_Protocol_Design.md    → Technical details
+
+═══════════════════════════════════════════════════════════════════════
+RECOMMENDED READING ORDER
+═══════════════════════════════════════════════════════════════════════
+
+1. PROJECT_SUMMARY.txt       (5 minutes)  - Get the big picture
+2. QUICK_START.md            (10 minutes) - Learn how to use
+3. Run ./satp_demo           (15 minutes) - See it working
+4. README.md                 (30 minutes) - Understand details
+5. SATP_Protocol_Design.md   (45 minutes) - Deep dive
+6. Source code files         (as needed)  - Implementation
+
+═══════════════════════════════════════════════════════════════════════
+DEPENDENCIES
+═══════════════════════════════════════════════════════════════════════
+
+To run pre-compiled demo:
+→ Linux system (Ubuntu 20.04+)
+→ No additional dependencies needed!
+
+To build from source:
+→ C++17 compiler (g++ 7.0+)
+→ OpenSSL development libraries
+   $ sudo apt-get install libssl-dev
+
+═══════════════════════════════════════════════════════════════════════
+TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════════
+
+Problem: satp_demo won't run
+Solution: $ chmod +x satp_demo
+
+Problem: Build fails with OpenSSL error
+Solution: $ make install-deps
+
+Problem: Need to rebuild
+Solution: $ make clean && make
+
+═══════════════════════════════════════════════════════════════════════
+SUPPORT
+═══════════════════════════════════════════════════════════════════════
+
+All files are:
+✓ Well-commented
+✓ Documented
+✓ Self-contained
+✓ Ready to use
+
+For questions about specific features, check:
+→ README.md for usage questions
+→ SATP_Protocol_Design.md for protocol questions
+→ Comments in source code for implementation questions
+
+═══════════════════════════════════════════════════════════════════════
+PROJECT STATUS
+═══════════════════════════════════════════════════════════════════════
+
+✅ Protocol designed
+✅ Prototype implemented
+✅ Documentation complete
+✅ Demonstrations working
+✅ Research validated
+✅ Ready for presentation
+
+═══════════════════════════════════════════════════════════════════════
+
+Created: November 2, 2025
+Version: SATP v1.0
+Team: Aitkazy B., Bekbulat A., Baktash A.P., Kurmanbekov A., Turtulov R.
+
+═══════════════════════════════════════════════════════════════════════
