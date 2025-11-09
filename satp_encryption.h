@@ -24,49 +24,72 @@ private:
     std::vector<uint8_t> session_key_;
     std::vector<uint8_t> hmac_key_;
     bool is_initialized_;
-    
+
     // Statistics
     size_t total_encrypted_;
     size_t total_decrypted_;
-    
+
 public:
-    EncryptionManager() 
+    EncryptionManager()
         : current_level_(SecurityLevel::LEVEL_2_BALANCED),
           is_initialized_(false),
           total_encrypted_(0),
           total_decrypted_(0) {
     }
-    
+
     // Initialize encryption with new session keys
     bool initialize(SecurityLevel level) {
         current_level_ = level;
-        
+
         // Generate random session key
         size_t key_size = getKeySize(level);
         session_key_.resize(key_size);
-        
+
         if (RAND_bytes(session_key_.data(), key_size) != 1) {
             return false;
         }
-        
+
         // Generate HMAC key
         hmac_key_.resize(32); // 256 bits for HMAC-SHA256
         if (RAND_bytes(hmac_key_.data(), 32) != 1) {
             return false;
         }
-        
+
         is_initialized_ = true;
         return true;
     }
     
+    // Initialize with Pre-Shared Key (PSK) for IoT devices
+    bool initializeWithPSK(SecurityLevel level, const std::string& psk) {
+        current_level_ = level;
+        
+        // Use PSK to derive session key (simplified - in production use HKDF)
+        size_t key_size = getKeySize(level);
+        session_key_.resize(key_size);
+        
+        // Simple key derivation from PSK
+        for (size_t i = 0; i < key_size; i++) {
+            session_key_[i] = psk[i % psk.length()] ^ (i & 0xFF);
+        }
+        
+        // Derive HMAC key from PSK
+        hmac_key_.resize(32);
+        for (size_t i = 0; i < 32; i++) {
+            hmac_key_[i] = psk[(i + key_size) % psk.length()] ^ ((i * 2) & 0xFF);
+        }
+        
+        is_initialized_ = true;
+        return true;
+    }
+
     // Encrypt payload based on security level
     std::vector<uint8_t> encrypt(const std::vector<uint8_t>& plaintext) {
         if (!is_initialized_) {
             throw std::runtime_error("EncryptionManager not initialized");
         }
-        
+
         total_encrypted_++;
-        
+
         switch (current_level_) {
             case SecurityLevel::LEVEL_1_MAXIMUM:
                 return encryptAES256GCM(plaintext);
@@ -80,15 +103,15 @@ public:
                 return encryptAES128GCM(plaintext);
         }
     }
-    
+
     // Decrypt payload
     std::vector<uint8_t> decrypt(const std::vector<uint8_t>& ciphertext) {
         if (!is_initialized_) {
             throw std::runtime_error("EncryptionManager not initialized");
         }
-        
+
         total_decrypted_++;
-        
+
         switch (current_level_) {
             case SecurityLevel::LEVEL_1_MAXIMUM:
                 return decryptAES256GCM(ciphertext);
@@ -102,26 +125,26 @@ public:
                 return decryptAES128GCM(ciphertext);
         }
     }
-    
+
     // Calculate HMAC for message integrity
     std::vector<uint8_t> calculateHMAC(const std::vector<uint8_t>& data) {
         std::vector<uint8_t> hmac_result(HMAC_SIZE);
         unsigned int len = HMAC_SIZE;
-        
-        HMAC(EVP_sha256(), 
+
+        HMAC(EVP_sha256(),
              hmac_key_.data(), hmac_key_.size(),
              data.data(), data.size(),
              hmac_result.data(), &len);
-        
+
         return hmac_result;
     }
-    
+
     // Verify HMAC
     bool verifyHMAC(const std::vector<uint8_t>& data, const uint8_t* hmac) {
         auto calculated = calculateHMAC(data);
         return (memcmp(calculated.data(), hmac, HMAC_SIZE) == 0);
     }
-    
+
     // Update security level (power-aware adaptation)
     void updateSecurityLevel(SecurityLevel new_level) {
         if (new_level != current_level_) {
@@ -130,16 +153,16 @@ public:
             initialize(new_level);
         }
     }
-    
+
     // Get current security level
     SecurityLevel getSecurityLevel() const {
         return current_level_;
     }
-    
+
     // Get statistics
     size_t getEncryptedCount() const { return total_encrypted_; }
     size_t getDecryptedCount() const { return total_decrypted_; }
-    
+
 private:
     // Get key size based on security level
     size_t getKeySize(SecurityLevel level) const {
@@ -156,7 +179,7 @@ private:
                 return 16;
         }
     }
-    
+
     // AES-256-GCM encryption (Maximum Security)
     std::vector<uint8_t> encryptAES256GCM(const std::vector<uint8_t>& plaintext) {
         // SIMULATION: In real implementation, use OpenSSL EVP_EncryptInit_ex
@@ -167,7 +190,7 @@ private:
         }
         return ciphertext;
     }
-    
+
     // AES-128-GCM encryption (Balanced Security) - Default
     std::vector<uint8_t> encryptAES128GCM(const std::vector<uint8_t>& plaintext) {
         // SIMULATION: XOR-based encryption for prototype
@@ -177,7 +200,7 @@ private:
         }
         return ciphertext;
     }
-    
+
     // ChaCha20 encryption (Minimal Security for low power)
     std::vector<uint8_t> encryptChaCha20(const std::vector<uint8_t>& plaintext) {
         // SIMULATION: Simple XOR for demonstration
@@ -187,7 +210,7 @@ private:
         }
         return ciphertext;
     }
-    
+
     // Minimal encryption (Emergency mode)
     std::vector<uint8_t> encryptMinimal(const std::vector<uint8_t>& plaintext) {
         // SIMULATION: Very basic obfuscation only
@@ -197,20 +220,20 @@ private:
         }
         return ciphertext;
     }
-    
+
     // Decryption methods (inverse of encryption for XOR-based simulation)
     std::vector<uint8_t> decryptAES256GCM(const std::vector<uint8_t>& ciphertext) {
         return encryptAES256GCM(ciphertext); // XOR is self-inverse
     }
-    
+
     std::vector<uint8_t> decryptAES128GCM(const std::vector<uint8_t>& ciphertext) {
         return encryptAES128GCM(ciphertext);
     }
-    
+
     std::vector<uint8_t> decryptChaCha20(const std::vector<uint8_t>& ciphertext) {
         return encryptChaCha20(ciphertext);
     }
-    
+
     std::vector<uint8_t> decryptMinimal(const std::vector<uint8_t>& ciphertext) {
         return encryptMinimal(ciphertext);
     }

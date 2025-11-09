@@ -98,7 +98,7 @@ struct SATPMessage {
     SecurityMetadata security_meta;
     std::vector<uint8_t> payload;
     uint8_t hmac[HMAC_SIZE];       // HMAC-SHA256 integrity check
-    
+
     SATPMessage() {
         std::memset(&header, 0, sizeof(MessageHeader));
         std::memset(&security_meta, 0, sizeof(SecurityMetadata));
@@ -113,8 +113,8 @@ struct SessionInfo {
     std::vector<uint8_t> session_key;
     std::chrono::system_clock::time_point created_at;
     bool is_authenticated;
-    
-    SessionInfo() : session_id(0), 
+
+    SessionInfo() : session_id(0),
                    security_level(SecurityLevel::LEVEL_2_BALANCED),
                    is_authenticated(false) {
         created_at = std::chrono::system_clock::now();
@@ -128,8 +128,8 @@ struct DeviceInfo {
     PowerState power_state;
     uint8_t battery_percentage;
     bool is_assistive_device;     // Flag for accessibility features
-    
-    DeviceInfo() : power_state(PowerState::FULL), 
+
+    DeviceInfo() : power_state(PowerState::FULL),
                    battery_percentage(100),
                    is_assistive_device(true) {}
 };
@@ -142,8 +142,8 @@ struct NavigationData {
     float distance_to_obstacle;    // Meters
     std::string obstacle_type;
     Priority urgency;
-    
-    NavigationData() : latitude(0.0), longitude(0.0), 
+
+    NavigationData() : latitude(0.0), longitude(0.0),
                       heading(0.0), distance_to_obstacle(-1.0),
                       urgency(Priority::NORMAL) {}
 };
@@ -163,7 +163,7 @@ struct PrivacySettings {
     bool prefer_local_processing;
     bool enable_cloud_routing;
     uint8_t location_precision_meters;  // Minimum: 10m, Maximum: 1000m
-    
+
     PrivacySettings() : enable_location_anonymization(true),
                        prefer_local_processing(true),
                        enable_cloud_routing(false),

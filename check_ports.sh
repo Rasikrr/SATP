@@ -1,0 +1,11 @@
+#!/bin/bash
+echo "Проверка портов для SATP..."
+echo ""
+echo "1. Запустите сервер в другом терминале: ./satp_server"
+echo "2. Затем запустите этот скрипт"
+echo ""
+echo "Ищем процессы на порту 5555:"
+lsof -i :5555 2>/dev/null || echo "Сервер не запущен"
+echo ""
+echo "Все UDP соединения с портом 5555:"
+netstat -an 2>/dev/null | grep 5555 || ss -u | grep 5555 || echo "Команды netstat/ss недоступны"

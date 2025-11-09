@@ -6,33 +6,79 @@ CXXFLAGS = -std=c++17 -Wall -Wextra -O2
 LDFLAGS = -lssl -lcrypto
 
 TARGET = satp_demo
+NETWORK_SERVER = satp_server
+NETWORK_CLIENT = satp_client
+
 SOURCES = satp_demo.cpp
+SERVER_SOURCES = satp_server_test.cpp
+CLIENT_SOURCES = satp_client_test.cpp
+
 HEADERS = satp_protocol.h satp_encryption.h satp_client.h
+NETWORK_HEADERS = satp_network_server.h satp_network_client.h
 
 # Colors for output
 RED = \033[0;31m
 GREEN = \033[0;32m
 YELLOW = \033[1;33m
+BLUE = \033[0;34m
 NC = \033[0m # No Color
 
-.PHONY: all clean run help install-deps
+.PHONY: all clean run help install-deps network server client test-network
 
 all: $(TARGET)
 	@echo "$(GREEN)✓ SATP Protocol prototype built successfully!$(NC)"
 	@echo "$(YELLOW)Run with: make run$(NC)"
+	@echo "$(BLUE)For network test: make network$(NC)"
 
 $(TARGET): $(SOURCES) $(HEADERS)
 	@echo "$(YELLOW)Building SATP Protocol prototype...$(NC)"
 	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(TARGET) $(LDFLAGS)
+
+# Build network components
+network: $(NETWORK_SERVER) $(NETWORK_CLIENT)
+	@echo "$(GREEN)✓ Network components built successfully!$(NC)"
+	@echo "$(BLUE)Start server: ./$(NETWORK_SERVER)$(NC)"
+	@echo "$(BLUE)Start client: ./$(NETWORK_CLIENT)$(NC)"
+
+$(NETWORK_SERVER): $(SERVER_SOURCES) $(HEADERS) $(NETWORK_HEADERS)
+	@echo "$(YELLOW)Building SATP Network Server...$(NC)"
+	$(CXX) $(CXXFLAGS) $(SERVER_SOURCES) -o $(NETWORK_SERVER) $(LDFLAGS)
+
+$(NETWORK_CLIENT): $(CLIENT_SOURCES) $(HEADERS) $(NETWORK_HEADERS)
+	@echo "$(YELLOW)Building SATP Network Client...$(NC)"
+	$(CXX) $(CXXFLAGS) $(CLIENT_SOURCES) -o $(NETWORK_CLIENT) $(LDFLAGS)
 
 run: $(TARGET)
 	@echo "$(GREEN)Starting SATP Protocol Demonstration...$(NC)"
 	@echo ""
 	./$(TARGET)
 
+# Convenience targets
+server: $(NETWORK_SERVER)
+	@echo "$(GREEN)Starting SATP Server on port 5555...$(NC)"
+	./$(NETWORK_SERVER)
+
+client: $(NETWORK_CLIENT)
+	@echo "$(GREEN)Starting SATP Client...$(NC)"
+	./$(NETWORK_CLIENT)
+
+# Run automated network test (requires tmux or manual terminal setup)
+test-network: network
+	@echo "$(YELLOW)═══════════════════════════════════════════════════$(NC)"
+	@echo "$(GREEN)Network Test Instructions:$(NC)"
+	@echo "$(YELLOW)═══════════════════════════════════════════════════$(NC)"
+	@echo ""
+	@echo "1. Open a NEW terminal and run:"
+	@echo "   $(BLUE)./$(NETWORK_SERVER)$(NC)"
+	@echo ""
+	@echo "2. Then in this terminal run:"
+	@echo "   $(BLUE)./$(NETWORK_CLIENT)$(NC)"
+	@echo ""
+	@echo "$(YELLOW)═══════════════════════════════════════════════════$(NC)"
+
 clean:
 	@echo "$(YELLOW)Cleaning build files...$(NC)"
-	rm -f $(TARGET)
+	rm -f $(TARGET) $(NETWORK_SERVER) $(NETWORK_CLIENT)
 	@echo "$(GREEN)✓ Clean complete$(NC)"
 
 # Install OpenSSL dependencies (Ubuntu/Debian)
