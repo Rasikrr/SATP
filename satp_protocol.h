@@ -45,6 +45,13 @@ enum class SecurityLevel : uint8_t {
     LEVEL_EMERGENCY = 0x03    // Critical commands only
 };
 
+// Privacy levels (controls PII exposure)
+enum class PrivacyLevel : uint8_t {
+    ANONYMOUS = 0x00,       // No device ID, no user data (only coordinates + payload)
+    PSEUDONYMOUS = 0x01,    // Temporary session ID (changes per session)
+    IDENTIFIED = 0x02       // Full device ID + user data
+};
+
 // Message priority
 enum class Priority : uint8_t {
     LOW = 0x00,      // Non-critical telemetry
@@ -80,7 +87,8 @@ struct MessageHeader {
     uint8_t message_type : 4;      // MessageType enum
     uint8_t security_level : 2;    // SecurityLevel enum
     uint8_t priority : 2;          // Priority enum
-    uint8_t reserved : 4;          // Reserved for future use
+    uint8_t privacy_level : 2;     // PrivacyLevel enum (NEW!)
+    uint8_t reserved : 2;          // Reserved for future use
     uint16_t sequence_number;      // Sequence number for ordering
     uint16_t payload_length;       // Length of payload in bytes
     uint16_t flags;                // Additional flags
@@ -168,6 +176,50 @@ struct PrivacySettings {
                        prefer_local_processing(true),
                        enable_cloud_routing(false),
                        location_precision_meters(50) {}
+};
+
+// Device Authentication Token (like JWT but for IoT)
+// This proves device is genuine SATP device, not a hacker
+// Server validates token WITHOUT storing it (checked against env secret)
+struct DeviceToken {
+    uint8_t token_hash[32];        // SHA-256 hash of (device_secret + timestamp)
+    uint64_t timestamp;            // Token creation time
+    
+    DeviceToken() : timestamp(0) {
+        std::memset(token_hash, 0, 32);
+    }
+    
+    // Generate token from device secret (like JWT signing)
+    static DeviceToken generate(const std::string& device_secret);
+    
+    // Validate token on server (like JWT verification with env secret)
+    static bool validate(const DeviceToken& token, const std::string& server_secret);
+};
+
+// Anonymous Message Payload (PRIVACY MODE = ANONYMOUS)
+// Only essential data, no PII (Personally Identifiable Information)
+struct AnonymousPayload {
+    double latitude;               // GPS coordinates (essential for navigation)
+    double longitude;
+    std::string alert_type;        // e.g., "AMBULANCE", "OBSTACLE", "FALL_DETECTED"
+    std::string payload_data;      // Working payload (e.g., obstacle distance)
+    DeviceToken auth_token;        // Proves it's genuine device (not saved in DB!)
+    
+    AnonymousPayload() : latitude(0.0), longitude(0.0) {}
+};
+
+// Identified Message Payload (PRIVACY MODE = IDENTIFIED)
+// Full device info + user data
+struct IdentifiedPayload {
+    std::string device_id;         // e.g., "SMART_CANE_001"
+    std::string user_id;           // Optional user identifier
+    double latitude;
+    double longitude;
+    std::string alert_type;
+    std::string payload_data;
+    DeviceToken auth_token;
+    
+    IdentifiedPayload() : latitude(0.0), longitude(0.0) {}
 };
 
 } // namespace SATP

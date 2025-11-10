@@ -34,20 +34,6 @@ $(TARGET): $(SOURCES) $(HEADERS)
 	@echo "$(YELLOW)Building SATP Protocol prototype...$(NC)"
 	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(TARGET) $(LDFLAGS)
 
-# Build network components
-network: $(NETWORK_SERVER) $(NETWORK_CLIENT)
-	@echo "$(GREEN)✓ Network components built successfully!$(NC)"
-	@echo "$(BLUE)Start server: ./$(NETWORK_SERVER)$(NC)"
-	@echo "$(BLUE)Start client: ./$(NETWORK_CLIENT)$(NC)"
-
-$(NETWORK_SERVER): $(SERVER_SOURCES) $(HEADERS) $(NETWORK_HEADERS)
-	@echo "$(YELLOW)Building SATP Network Server...$(NC)"
-	$(CXX) $(CXXFLAGS) $(SERVER_SOURCES) -o $(NETWORK_SERVER) $(LDFLAGS)
-
-$(NETWORK_CLIENT): $(CLIENT_SOURCES) $(HEADERS) $(NETWORK_HEADERS)
-	@echo "$(YELLOW)Building SATP Network Client...$(NC)"
-	$(CXX) $(CXXFLAGS) $(CLIENT_SOURCES) -o $(NETWORK_CLIENT) $(LDFLAGS)
-
 run: $(TARGET)
 	@echo "$(GREEN)Starting SATP Protocol Demonstration...$(NC)"
 	@echo ""
