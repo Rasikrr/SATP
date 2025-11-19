@@ -1,0 +1,62 @@
+[2025-11-19 16:24:05.749] [SERVER] ╔══════════════════════════════════════════════════════════════════════╗
+[2025-11-19 16:24:05.749] [SERVER] ║                                                                      ║
+[2025-11-19 16:24:05.749] [SERVER] ║    SATP Network Server - Real UDP Implementation                    ║
+[2025-11-19 16:24:05.749] [SERVER] ║    Secure Assistive Transport Protocol                              ║
+[2025-11-19 16:24:05.749] [SERVER] ║                                                                      ║
+[2025-11-19 16:24:05.749] [SERVER] ╚══════════════════════════════════════════════════════════════════════╝
+[2025-11-19 16:24:05.749] [SERVER] [INFO] Server will listen on UDP port: 5555
+[2025-11-19 16:24:05.749] [SERVER] [INFO] Press Ctrl+C to stop the server
+[2025-11-19 16:24:05.749] [SERVER] [SATP-SERVER] ═══════════════════════════════
+[2025-11-19 16:24:05.749] [SERVER] [SATP-SERVER] Starting SATP Server...
+[2025-11-19 16:24:05.749] [SERVER] [SATP-SERVER] ═══════════════════════════════
+[2025-11-19 16:24:05.749] [SERVER] [SATP-SERVER] ✓ Server started successfully
+[2025-11-19 16:24:05.749] [SERVER] [SATP-SERVER] Listening on port: 5555
+[2025-11-19 16:24:05.750] [SERVER] [SATP-SERVER] Transport: UDP
+[2025-11-19 16:24:05.750] [SERVER] [SATP-SERVER] Waiting for clients...
+[2025-11-19 16:24:05.750] [SERVER] [SATP-SERVER] Server running. Press Ctrl+C to stop.
+[2025-11-19 16:24:08.753] [SERVER] [SATP-SERVER] ↓ Received 81 bytes from 127.0.0.1:52266
+[2025-11-19 16:24:08.754] [SERVER] [SATP-SERVER] Processing: HELLO (seq: 0)
+[2025-11-19 16:24:08.754] [SERVER] [SATP-SERVER] → New client connection request
+[2025-11-19 16:24:08.754] [SERVER] [SATP-SERVER] ✓ Session created for device: SMART_CANE_001
+[2025-11-19 16:24:08.754] [SERVER] [SATP-SERVER] Session ID: 0x187964b2ee15f023
+[2025-11-19 16:24:08.754] [SERVER] [SATP-SERVER] ↑ Sent HELLO_ACK (56 bytes)
+[2025-11-19 16:24:08.755] [SERVER] [SATP-SERVER] ↓ Received 56 bytes from 127.0.0.1:52266
+[2025-11-19 16:24:08.755] [SERVER] [SATP-SERVER] Processing: KEY_EXCHANGE (seq: 1)
+[2025-11-19 16:24:08.755] [SERVER] [SATP-SERVER] → Key exchange in progress
+[2025-11-19 16:24:08.755] [SERVER] [SATP-SERVER] ↑ Sent SESSION_READY (56 bytes)
+[2025-11-19 16:24:08.755] [SERVER] [SATP-SERVER] ✓ Session authenticated: SMART_CANE_001
+[2025-11-19 16:24:08.756] [SERVER] [SATP-SERVER] ↓ Received 96 bytes from 127.0.0.1:52266
+[2025-11-19 16:24:08.756] [SERVER] [SATP-SERVER] Processing: DATA (seq: 2)
+[2025-11-19 16:24:08.756] [SERVER] [SATP-SERVER] ✓ DATA from SMART_CANE_001 (priority: 1, payload: 40 bytes)
+[2025-11-19 16:24:08.756] [SERVER] [SATP-SERVER] Decrypted data: 51.160360,71.470270,45.000000,-1.000000,
+[2025-11-19 16:24:09.255] [SERVER] [SATP-SERVER] ↓ Received 96 bytes from 127.0.0.1:52266
+[2025-11-19 16:24:09.256] [SERVER] [SATP-SERVER] Processing: DATA (seq: 3)
+[2025-11-19 16:24:09.256] [SERVER] [SATP-SERVER] ✓ DATA from SMART_CANE_001 (priority: 1, payload: 40 bytes)
+[2025-11-19 16:24:09.257] [SERVER] [SATP-SERVER] Decrypted data: 51.160811,71.470721,60.000000,-1.000000,
+[2025-11-19 16:24:09.755] [SERVER] [SATP-SERVER] ↓ Received 96 bytes from 127.0.0.1:52266
+[2025-11-19 16:24:09.756] [SERVER] [SATP-SERVER] Processing: DATA (seq: 4)
+[2025-11-19 16:24:09.756] [SERVER] [SATP-SERVER] ✓ DATA from SMART_CANE_001 (priority: 1, payload: 40 bytes)
+[2025-11-19 16:24:09.757] [SERVER] [SATP-SERVER] Decrypted data: 51.160811,71.470721,75.000000,-1.000000,
+[2025-11-19 16:24:10.256] [SERVER] [SATP-SERVER] ↓ Received 105 bytes from 127.0.0.1:52266
+[2025-11-19 16:24:10.256] [SERVER] [SATP-SERVER] Processing: DATA (seq: 5)
+[2025-11-19 16:24:10.257] [SERVER] [SATP-SERVER] ✓ DATA from SMART_CANE_001 (priority: 3, payload: 49 bytes)
+[2025-11-19 16:24:10.258] [SERVER] [SATP-SERVER] Decrypted data: 51.160811,71.470721,75.000000,1.500000,pedestrian
+[2025-11-19 16:24:10.756] [SERVER] [SATP-SERVER] ↓ Received 115 bytes from 127.0.0.1:52266
+[2025-11-19 16:24:10.756] [SERVER] [SATP-SERVER] Processing: DATA (seq: 6)
+[2025-11-19 16:24:10.757] [SERVER] [SATP-SERVER] ✓ DATA from SMART_CANE_001 (priority: 1, payload: 59 bytes)
+[2025-11-19 16:24:10.758] [SERVER] [SATP-SERVER] Decrypted data: Hello from Smart Cane! Battery OK, all sensors operational.
+[2025-11-19 16:24:11.256] [SERVER] [SATP-SERVER] ↓ Received 56 bytes from 127.0.0.1:52266
+[2025-11-19 16:24:11.256] [SERVER] [SATP-SERVER] Processing: HEARTBEAT (seq: 7)
+[2025-11-19 16:24:11.257] [SERVER] [SATP-SERVER] ✓ Heartbeat from SMART_CANE_001
+[2025-11-19 16:24:11.758] [SERVER] [SATP-SERVER] ↓ Received 95 bytes from 127.0.0.1:52266
+[2025-11-19 16:24:11.758] [SERVER] [SATP-SERVER] Processing: DATA (seq: 8)
+[2025-11-19 16:24:11.759] [SERVER] [SATP-SERVER] ✗ HMAC verification failed!
+[2025-11-19 16:24:12.258] [SERVER] [SATP-SERVER] ↓ Received 95 bytes from 127.0.0.1:52266
+[2025-11-19 16:24:12.259] [SERVER] [SATP-SERVER] Processing: DATA (seq: 9)
+[2025-11-19 16:24:12.259] [SERVER] [SATP-SERVER] ✗ HMAC verification failed!
+[2025-11-19 16:24:12.759] [SERVER] [SATP-SERVER] ↓ Received 95 bytes from 127.0.0.1:52266
+[2025-11-19 16:24:12.759] [SERVER] [SATP-SERVER] Processing: DATA (seq: 10)
+[2025-11-19 16:24:12.760] [SERVER] [SATP-SERVER] ✗ HMAC verification failed!
+[2025-11-19 16:24:13.259] [SERVER] [SATP-SERVER] ↓ Received 56 bytes from 127.0.0.1:52266
+[2025-11-19 16:24:13.259] [SERVER] [SATP-SERVER] Processing: DISCONNECT (seq: 11)
+[2025-11-19 16:24:13.260] [SERVER] [SATP-SERVER] Client disconnected: SMART_CANE_001

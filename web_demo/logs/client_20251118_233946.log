@@ -1,0 +1,87 @@
+[2025-11-18 23:40:10.158] [CLIENT] ╔══════════════════════════════════════════════════════════════════════╗
+[2025-11-18 23:40:10.158] [CLIENT] ║                                                                      ║
+[2025-11-18 23:40:10.158] [CLIENT] ║    SATP Network Client - Real UDP Implementation                    ║
+[2025-11-18 23:40:10.158] [CLIENT] ║    Secure Assistive Transport Protocol                              ║
+[2025-11-18 23:40:10.158] [CLIENT] ║                                                                      ║
+[2025-11-18 23:40:10.158] [CLIENT] ╚══════════════════════════════════════════════════════════════════════╝
+[2025-11-18 23:40:10.158] [CLIENT] [INFO] Server address: 127.0.0.1:5555
+[2025-11-18 23:40:10.158] [CLIENT] [SATP-NET] Initializing UDP socket...
+[2025-11-18 23:40:10.158] [CLIENT] [SATP-NET] ✓ UDP socket initialized
+[2025-11-18 23:40:10.158] [CLIENT] [SATP-NET] Server: 127.0.0.1:5555
+[2025-11-18 23:40:10.159] [CLIENT] [SATP] ═══ Starting Connection Handshake ═══
+[2025-11-18 23:40:10.159] [CLIENT] [SATP] Device: SMART_CANE_001
+[2025-11-18 23:40:10.159] [CLIENT] [SATP] ✓ Encryption initialized with PSK: MAXIMUM
+[2025-11-18 23:40:10.159] [CLIENT] [SATP] Step 1/3: Sending HELLO...
+[2025-11-18 23:40:10.159] [CLIENT] [SATP-NET] ↑ Sent HELLO (seq: 0, 81 bytes)
+[2025-11-18 23:40:10.159] [CLIENT] [SATP] Step 2/3: Waiting for HELLO_ACK...
+[2025-11-18 23:40:10.160] [CLIENT] [SATP-NET] ↓ Received HELLO_ACK (seq: 0, 56 bytes)
+[2025-11-18 23:40:10.160] [CLIENT] [SATP] ✓ HELLO_ACK received
+[2025-11-18 23:40:10.160] [CLIENT] [SATP] Step 3/3: Sending KEY_EXCHANGE...
+[2025-11-18 23:40:10.161] [CLIENT] [SATP-NET] ↑ Sent KEY_EXCHANGE (seq: 1, 56 bytes)
+[2025-11-18 23:40:10.161] [CLIENT] [SATP-NET] ↓ Received SESSION_READY (seq: 1, 56 bytes)
+[2025-11-18 23:40:10.161] [CLIENT] [SATP] ✓ SESSION_READY received
+[2025-11-18 23:40:10.161] [CLIENT] [SATP] ═══════════════════════════════════
+[2025-11-18 23:40:10.161] [CLIENT] [SATP] ✓✓✓ CONNECTION ESTABLISHED ✓✓✓
+[2025-11-18 23:40:10.161] [CLIENT] [SATP] ═══════════════════════════════════
+[2025-11-18 23:40:10.161] [CLIENT] [SATP] Session ID: 0x18792de98a158bd0
+[2025-11-18 23:40:10.161] [CLIENT] [SATP] Security Level: MAXIMUM
+[2025-11-18 23:40:10.161] [CLIENT] [SATP] Transport: UDP over port 5555
+[2025-11-18 23:40:10.161] [CLIENT] [SATP] ═══════════════════════════════════
+[2025-11-18 23:40:10.161] [CLIENT] [TEST] Starting data transmission tests...
+[2025-11-18 23:40:10.161] [CLIENT] ═══ Test 1: Sending Navigation Data ═══
+[2025-11-18 23:40:10.161] [CLIENT] [TEST] Sending location update #1
+[2025-11-18 23:40:10.161] [CLIENT] Lat: 51.1605, Lon: 71.4704
+[2025-11-18 23:40:10.161] [CLIENT] [SATP-NET] ↑ Sent DATA (seq: 2, 96 bytes)
+[2025-11-18 23:40:10.162] [CLIENT] ✓ Sent successfully
+[2025-11-18 23:40:10.660] [CLIENT] [TEST] Sending location update #2
+[2025-11-18 23:40:10.661] [CLIENT] Lat: 51.1606, Lon: 71.4705
+[2025-11-18 23:40:10.661] [CLIENT] [SATP-NET] ↑ Sent DATA (seq: 3, 96 bytes)
+[2025-11-18 23:40:10.661] [CLIENT] ✓ Sent successfully
+[2025-11-18 23:40:11.161] [CLIENT] [TEST] Sending location update #3
+[2025-11-18 23:40:11.161] [CLIENT] Lat: 51.1607, Lon: 71.4706
+[2025-11-18 23:40:11.161] [CLIENT] [SATP-NET] ↑ Sent DATA (seq: 4, 96 bytes)
+[2025-11-18 23:40:11.161] [CLIENT] ✓ Sent successfully
+[2025-11-18 23:40:11.661] [CLIENT] ═══ Test 2: Sending Critical Obstacle Alert ═══
+[2025-11-18 23:40:11.661] [CLIENT] [TEST] ⚠ CRITICAL: Obstacle at 1.5 meters!
+[2025-11-18 23:40:11.661] [CLIENT] [SATP-NET] ↑ Sent DATA (seq: 5, 105 bytes)
+[2025-11-18 23:40:11.661] [CLIENT] ✓ Critical alert sent
+[2025-11-18 23:40:12.161] [CLIENT] ═══ Test 3: Sending Custom Data ═══
+[2025-11-18 23:40:12.161] [CLIENT] [TEST] Sending: "Hello from Smart Cane! Battery OK, all sensors operational."
+[2025-11-18 23:40:12.162] [CLIENT] [SATP-NET] ↑ Sent DATA (seq: 6, 115 bytes)
+[2025-11-18 23:40:12.162] [CLIENT] ✓ Custom data sent
+[2025-11-18 23:40:12.661] [CLIENT] ═══ Test 4: Sending Heartbeat ═══
+[2025-11-18 23:40:12.662] [CLIENT] [SATP-NET] ↑ Sent HEARTBEAT (seq: 7, 56 bytes)
+[2025-11-18 23:40:12.662] [CLIENT] ✓ Heartbeat sent
+[2025-11-18 23:40:13.162] [CLIENT] ═══ Test 5: Testing Power-Aware Security ═══
+[2025-11-18 23:40:13.162] [CLIENT] [TEST] Simulating battery drain...
+[2025-11-18 23:40:13.162] [CLIENT] [TEST] Battery: 65%
+[2025-11-18 23:40:13.162] [CLIENT] [SATP] Power state: FULL → BALANCED
+[2025-11-18 23:40:13.163] [CLIENT] [SATP] Security adapted: BALANCED
+[2025-11-18 23:40:13.163] [CLIENT] [SATP-NET] ↑ Sent DATA (seq: 8, 95 bytes)
+[2025-11-18 23:40:13.663] [CLIENT] [TEST] Battery: 40%
+[2025-11-18 23:40:13.664] [CLIENT] [SATP-NET] ↑ Sent DATA (seq: 9, 95 bytes)
+[2025-11-18 23:40:14.164] [CLIENT] [TEST] Battery: 15%
+[2025-11-18 23:40:14.164] [CLIENT] [SATP] Power state: BALANCED → LOW
+[2025-11-18 23:40:14.164] [CLIENT] [SATP] Security adapted: MINIMAL
+[2025-11-18 23:40:14.164] [CLIENT] [SATP-NET] ↑ Sent DATA (seq: 10, 95 bytes)
+[2025-11-18 23:40:14.664] [CLIENT] ═══ Final Statistics ═══
+[2025-11-18 23:40:14.664] [CLIENT] [SATP] ═══ NETWORK STATISTICS ═══
+[2025-11-18 23:40:14.664] [CLIENT] [SATP] Device ID: SMART_CANE_001
+[2025-11-18 23:40:14.664] [CLIENT] [SATP] Session ID: 0x18792de98a158bd0
+[2025-11-18 23:40:14.664] [CLIENT] [SATP] State: CONNECTED
+[2025-11-18 23:40:14.664] [CLIENT] [SATP] Security: MINIMAL
+[2025-11-18 23:40:14.664] [CLIENT] [SATP] Battery: 15%
+[2025-11-18 23:40:14.665] [CLIENT] [SATP] Messages Sent: 11
+[2025-11-18 23:40:14.665] [CLIENT] [SATP] Messages Received: 2
+[2025-11-18 23:40:14.665] [CLIENT] [SATP] Bytes Sent: 986 bytes
+[2025-11-18 23:40:14.665] [CLIENT] [SATP] Bytes Received: 112 bytes
+[2025-11-18 23:40:14.665] [CLIENT] [SATP] Errors: 0
+[2025-11-18 23:40:14.665] [CLIENT] [SATP] ═══════════════════════════
+[2025-11-18 23:40:14.665] [CLIENT] [TEST] Disconnecting from server...
+[2025-11-18 23:40:14.665] [CLIENT] [SATP] Disconnecting...
+[2025-11-18 23:40:14.666] [CLIENT] [SATP-NET] ↑ Sent DISCONNECT (seq: 11, 56 bytes)
+[2025-11-18 23:40:14.666] [CLIENT] [SATP] ✓ Disconnected
+[2025-11-18 23:40:14.666] [CLIENT] ╔══════════════════════════════════════════════════════════════════╗
+[2025-11-18 23:40:14.666] [CLIENT] ║              SATP Network Test Completed Successfully            ║
+[2025-11-18 23:40:14.666] [CLIENT] ╚══════════════════════════════════════════════════════════════════╝
+[2025-11-18 23:40:14.666] [CLIENT] [SATP] ✓ Disconnected
